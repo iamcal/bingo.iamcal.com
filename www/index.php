@@ -1,11 +1,16 @@
-<?
-	#
-	# $Id$
-	#
-
+<?php
 	$grid = 5;
 
-	$words = array(
+	$versions = [
+		'2006' => '2006 Classic Edition',
+		'2019' => '2019 Modern Edition',
+	];
+
+	$default = '2006';
+
+	$words = [];
+
+	$words['2006'] = array(
 		'web 2.0',
 		'identity 2.0',
 		'clickstream',
@@ -66,6 +71,37 @@
 		'mental model',
 	);
 
+	$words['2019'] = [
+		'pivot',
+		'machine learning',
+		'disruptive',
+		'shared understanding',
+		'mvp',
+		'gamification',
+	];
+
+
+
+	#
+	# determine version
+	#
+
+	$version = null;
+
+	if (isset($_GET['version'])){
+		if (isset($versions[$_GET['version']])){
+			$version = $_GET['version'];
+		}
+	}
+
+	if (is_null($version)){
+		header("location: /{$default}");
+		exit;
+	}
+
+
+	$words = $words[$version];
+
 	shuffle($words);
 	shuffle($words);
 ?>
@@ -75,17 +111,16 @@
 <style>
 
 body {
+	font-family: arial, helvetica, sans-serif;
 	text-align: center;
 }
 
 h1 {
-	font-family: arial, helvetica, sans-serif;
-	font-size: 20px;
+	font-size: 40px;
 	font-weight: bold;
 }
 
 td {
-	font-family: arial, helvetica, sans-serif;
 	font-size: 13px;
 }
 
@@ -94,8 +129,11 @@ td {
 }
 
 h3 {
-	font-family: arial, helvetica, sans-serif;
 	font-size: 14px;
+}
+
+#switcher {
+	margin: 20px 0;
 }
 
 #main {
@@ -269,6 +307,20 @@ function bingo_tick(){
 <body>
 
 <h1>Buzzword Bingo</h1>
+
+<div id="switcher">
+<?
+	$bits = [];
+	foreach ($versions as $k => $v){
+		if ($k == $version){
+			$bits[] = "<b>".HtmlSpecialChars($v)."</b>";
+		}else{
+			$bits[] = "<a href=\"/{$k}\">".HtmlSpecialChars($v)."</a>";
+		}
+	}
+	echo implode(' | ', $bits);
+?>
+</div>
 
 <div id="main">
 
