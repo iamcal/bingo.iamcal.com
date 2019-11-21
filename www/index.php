@@ -64,6 +64,12 @@
 		'80 / 20',
 		'power laws',
 		'mental model',
+		'pivot',
+		'machine learning',
+		'disruptive',
+		'shared understanding',
+		'mvp',
+		'gamification',
 	);
 
 	shuffle($words);
