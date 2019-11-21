@@ -1,0 +1,2 @@
+RewriteEngine on
+RewriteRule ^(\d\d\d\d)$	/index.php?version=$1	[L,QSA]
