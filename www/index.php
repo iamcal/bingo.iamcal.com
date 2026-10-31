@@ -1,4 +1,4 @@
-<?
+<?php
 	#
 	# $Id$
 	#
@@ -272,25 +272,25 @@ function bingo_tick(){
 
 <div id="main">
 
-<? for($y=0; $y<$grid; $y++){ ?>
-<? for($x=0; $x<$grid; $x++){ ?>
+<?php for($y=0; $y<$grid; $y++){ ?>
+<?php for($x=0; $x<$grid; $x++){ ?>
 	<div class="cold" style="left: <?=(2+($x*90))?>; top: <?=(2+($y*90))?>" id="cell<?=$x?><?=$y?>">
 		<table border="0" cellpadding="0" cellspacing="0" style="width: 88px; height: 88px;">
 			<tr valign="middle"><td align="center"><?=array_pop($words)?></td></tr>
 		</table>
 	</div>
-<? } ?>
-<? } ?>
+<?php } ?>
+<?php } ?>
 	<div id="bingo">
 		<table border="0" cellpadding="0" cellspacing="0" style="width: 452px; height: 452px;">
 			<tr valign="middle"><td align="center"><span class="bingo">BINGO!</a></td></tr>
 		</table>
 	</div>
-<? for($y=0; $y<$grid; $y++){ ?>
-<? for($x=0; $x<$grid; $x++){ ?>
+<?php for($y=0; $y<$grid; $y++){ ?>
+<?php for($x=0; $x<$grid; $x++){ ?>
 		<div class="cover" style="left: <?=(2+($x*90))?>; top: <?=(2+($y*90))?>" onclick="toggle('cell<?=$x?><?=$y?>')">&nbsp;</div>
-<? } ?>
-<? } ?>
+<?php } ?>
+<?php } ?>
 
 </div>
 
