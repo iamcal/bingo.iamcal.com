@@ -1,4 +1,4 @@
-<?
+<?php
 	#
 	# $Id$
 	#
@@ -104,15 +104,15 @@
 		$sx = $w / $grid;
 		$sy = $h / $grid;
 
-		$doc[u] = min($sx, $sy);
+		$doc['u'] = min($sx, $sy);
 
-		$doc[w] = $grid * $doc[u];
-		$doc[h] = $grid * $doc[u];
+		$doc['w'] = $grid * $doc['u'];
+		$doc['h'] = $grid * $doc['u'];
 
-		$doc[x] = $x + ($w/2) - ($doc[w]/2);
-		$doc[y] = $y + ($h/2) - ($doc[h]/2);
+		$doc['x'] = $x + ($w/2) - ($doc['w']/2);
+		$doc['y'] = $y + ($h/2) - ($doc['h']/2);
 
-		if ($doc[debug_rects]){
+		if ($doc['debug_rects']){
 			$pdf->SetFillColor(220);
 			$pdf->Rect($x, $y, $w, $h, 'F');
 		}
@@ -134,17 +134,17 @@
 
 			for ($i=1; $i<$grid; $i++){
 
-				$j = $doc[x] + ($doc[u] * $i);
+				$j = $doc['x'] + ($doc['u'] * $i);
 
 				if ($i % 10 == 0){
 					if ($layer == 2){
 						$pdf->SetDrawColor(150);
-						$pdf->Line($j, $doc[y], $j, $doc[y]+$doc[h]);
+						$pdf->Line($j, $doc['y'], $j, $doc['y']+$doc['h']);
 					}
 				}else{
 					if ($layer == 1){
 						$pdf->SetDrawColor(200);
-						$pdf->Line($j, $doc[y], $j, $doc[y]+$doc[h]);
+						$pdf->Line($j, $doc['y'], $j, $doc['y']+$doc['h']);
 					}
 				}
 			}
@@ -156,17 +156,17 @@
 
 			for ($i=1; $i<$grid; $i++){
 
-				$j = $doc[y] + ($doc[u] * $i);
+				$j = $doc['y'] + ($doc['u'] * $i);
 
 				if ($i % 10 == 0){
 					if ($layer == 2){
 						$pdf->SetDrawColor(150);
-						$pdf->Line($doc[x], $j, $doc[x]+$doc[w], $j);
+						$pdf->Line($doc['x'], $j, $doc['x']+$doc['w'], $j);
 					}
 				}else{
 					if ($layer == 1){
 						$pdf->SetDrawColor(200);
-						$pdf->Line($doc[x], $j, $doc[x]+$doc[w], $j);
+						$pdf->Line($doc['x'], $j, $doc['x']+$doc['w'], $j);
 					}
 				}
 			}
@@ -178,7 +178,7 @@
 
 		$pdf->SetDrawColor(0);
 
-		$pdf->Rect($doc[x], $doc[y], $doc[w], $doc[h]);
+		$pdf->Rect($doc['x'], $doc['y'], $doc['w'], $doc['h']);
 	}
 
 	function draw_pixels(){
@@ -190,22 +190,22 @@
 		for ($x=0; $x<$grid; $x++){
 			for ($y=0; $y<$grid; $y++){
 
-				$px = $doc[x] + ($x * $doc[u]);
-				$py = $doc[y] + ($y * $doc[u]);
+				$px = $doc['x'] + ($x * $doc['u']);
+				$py = $doc['y'] + ($y * $doc['u']);
 
-				$h4 = $doc[u]/4;
+				$h4 = $doc['u']/4;
 
 				$pdf->SetTextColor(0);
 				$pdf->SetXY($px, $py+$h4);
 
 				$word = array_pop($words);
 
-				$h = $doc[u] / 2;
+				$h = $doc['u'] / 2;
 				if (preg_match("!\n!", $word)){
 					$h /= 2;
 				}
 
-				$pdf->MultiCell($doc[u], $h, $word, 0, 'C');
+				$pdf->MultiCell($doc['u'], $h, $word, 0, 'C');
 
 			}
 		}
